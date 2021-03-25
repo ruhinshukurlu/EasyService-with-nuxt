@@ -48,4 +48,10 @@ export default {
         font-weight: bold;
         padding: 15px;
     }
+
+    @media (max-width : 1600px) {
+        .header-img{
+            height: 400px;
+        }
+    }
 </style>

@@ -17,16 +17,15 @@
           <div class="d-column">
             <span class="featured-skills-header border-bottom bold pb-1 mb-3">Featured Skills</span>
             <div class="d-flex tasker-category full justify-content-between" v-for="skill in worker.skills" :key='skill.name'>
-              <label class="category-name">{{skill.name}}</label>
+              <label class="category-name capitalize mb-3">{{skill.name}}</label>
               <span class="category-price bold">{{skill.price_per_hour}} {{skill.price_currency}} / hr</span>
             </div>
           </div>
           <div class="card-text d-column mt-3">
-            <span class="full border-bottom pb-1 mb-2 bold"
-              >I'm the right person for the job:</span
-            >
+            <span class="full border-bottom pb-1 mb-2 bold">I'm the right person for the job:</span>
             <p class="m-0">{{ worker.bio }}</p>
           </div>
+          
         </div>
       </div>
     </div>
@@ -88,4 +87,23 @@ height: 100%;
     padding: 5px 10px;
     border-radius: 5px;
 }
+
+ .view-profile-link{
+     display: flex;
+     text-decoration: none;
+     color: #2dbd9b;
+     border: 1px solid #2dbd9b;
+     padding: 5px 10px;
+     margin-top: 20px;
+    border-radius: 10px;
+    transition: .4s;
+    font-weight: 600;
+
+ }
+ 
+ .view-profile-link:hover{
+     background-color: #2dbd9b;
+     color: #fff;
+ }
+
 </style>

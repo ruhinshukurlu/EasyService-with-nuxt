@@ -26,17 +26,20 @@
             </option>
           </select>
         </div>
-        <div class="col-6 d-column">
-          <h5 class="border-bottom pb-2 mb-3">Sort By Rating</h5>
-          <button class="sort-btn" @click="sortByAscending">
-            Lowets-Highest
-          </button>
-          <button class="sort-btn" @click="sortByDescending">
-            Highest-Lowets
-          </button>
+        <div class="col-6 d-column address">
+          <h5 class="mb-3">
+            <i class="fas fa-sort-amount-down"></i>
+            Sort By Rating</h5>
+          <select name="sort" id="sort"  @change="sortByRating">
+            <option>Select Option</option>
+            <option value="ascending">Lowets-Highest</option>
+            <option value="descending">Highest-Lowets</option>
+          </select>
         </div>
       </div>
-      <AppWorkers :workers="filteredWorkers" :service="service" />
+      <transition-group name="flip-list">
+        <AppWorker v-for="worker in filteredWorkers" :key="worker.id" :worker="worker" :service="service" />
+      </transition-group>
     </div>
   </div>
 </template>
@@ -75,22 +78,29 @@ export default {
           }
         }
       });
-    },
+    }
   },
 
   methods: {
-    sortByAscending() {
-        console.log(this.filteredWorkers.rating);
+    sortByRating(e){
+      if (e.target.value == 'ascending') {
+        console.log(this.filteredWorkers[0].rating);
         this.filteredWorkers.sort((a, b) => (a.rating > b.rating ? 1 : -1));
-    },
-    sortByDescending() {
+        console.log(this.filteredWorkers[0].rating);
+      }else if(e.target.value){
+        console.log(this.filteredWorkers[0].rating);
         this.filteredWorkers.sort((a, b) => (a.rating < b.rating ? 1 : -1));
-    },
+        console.log(this.filteredWorkers[0].rating);
+      }
+    }
   },
 };
 </script>
-<style>
+<style scoped>
 
+.flip-list-move {
+  transition: transform 1s;
+}
 
 .service-img {
   width: 100%;
@@ -98,7 +108,7 @@ export default {
   /* object-fit: cover; */
 }
 
-#address {
+select {
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;

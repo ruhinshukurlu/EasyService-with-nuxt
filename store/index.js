@@ -1,7 +1,6 @@
 
 
 export const state = () => ({
-
     workplaces : [
         'Baku', 'Sumgayit','Absheron','Barda', 'Agdam'
     ],
@@ -82,6 +81,13 @@ export const state = () => ({
                     price_currency: 'AZN',
                     experience_description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make",
                     task_count: 4
+                },
+                {
+                    name: 'cleaning',
+                    price_per_hour: 13,
+                    price_currency: 'AZN',
+                    experience_description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make",
+                    task_count: 10
                 }
             ],
             rating: 7
@@ -112,6 +118,13 @@ export const state = () => ({
                     experience_description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make",
                     task_count: 4
                 },
+                {
+                    name: 'cleaning',
+                    price_per_hour: 15,
+                    price_currency: 'AZN',
+                    experience_description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make",
+                    task_count: 6
+                }
 
             ],
             rating: 8
@@ -232,6 +245,94 @@ export const state = () => ({
                 },
             ],
             rating: 7
-        }
+        },
+        {
+            id: 8,
+            name: 'Murad',
+            surname: 'Mammadli',
+            birth_date: '12-02-2002',
+            languages: ['Azerbaijan', 'English'],
+            experience: '4 year',
+            work_places: ['Baku'],
+            profile_img: 'https://content1.getnarrativeapp.com/68f6039f-a2f9-4e15-9b91-4f7cebe2a378/img_ref/4e80a9d6-aef4-4875-ab94-5952b6926e07/Hamish-5_professional_headshots_photographer_headshot_750.jpg',
+            bio: ` mollitia voluptatibus quas optio corrupti veritatis aliquam obcaecati
+                sequi neque? Sed in neque possimus corrupti sun`,
+            skills: [
+                {
+                    name: 'cleaning',
+                    price_per_hour: 23,
+                    price_currency: 'AZN',
+                    experience_description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make",
+                    task_count: 4
+                },
+                {
+                    name: 'repair',
+                    price_per_hour: 12,
+                    price_currency: 'AZN',
+                    experience_description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make",
+                    task_count: 4
+                }
+            ],
+            rating: 8
+        },
+        {
+            id: 9,
+            name: 'Vasif',
+            surname: 'Abdullayev',
+            birth_date: '12-02-2000',
+            languages: ['Azerbaijan', 'English', 'Turkey'],
+            experience: '3 year',
+            work_places: ['Barda', 'Agdam'],
+            profile_img: 'https://images.squarespace-cdn.com/content/v1/55bcbba5e4b09c9ffac5f9a3/1527566564346-K8WGUCQX7MLG0IQ33OMO/ke17ZwdGBToddI8pDm48kMFiMyT1nneRMhnmfuSfpxZ7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0mlM0or4nqX7jrn5yWu0hA1QXedaIFqnAbw_tQShHbKg4-O_KAc44ak5jGzrnn7f3A/Al-004.jpg?format=2500w',
+            bio: ` mollitia voluptatibus quas optio corrupti veritatis aliquam obcaecati
+                sequi neque? Sed in neque possimus corrupti sun`,
+            skills: [
+                {
+                    name: 'cleaning',
+                    price_per_hour: 20,
+                    price_currency: 'AZN',
+                    experience_description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make",
+                    task_count: 4
+                },
+                {
+                    name: 'home-service',
+                    price_per_hour: 13,
+                    price_currency: 'AZN',
+                    experience_description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make",
+                    task_count: 4
+                },
+            ],
+            rating: 9
+        },
+        {
+            id: 10,
+            name: 'Togrul',
+            surname: 'Mammadov',
+            birth_date: '18-01-2001',
+            languages: ['Azerbaijan', 'English', 'Turkey'],
+            experience: '2 years',
+            work_places: ['Sumgayit'],
+            profile_img: 'https://lh3.googleusercontent.com/proxy/3QXxlfnFNmF8oKimIufvhnaOJOzrk5bwq25JB7j1z6vNcmFFqu2t4QQ_dd4FtScXknDKtiiEPJxyMDC62_Q9Tl9uQr2iZ-nmC_cz_qchTcacfIfoiwGn1UwY6gPY5k19_Z-lUj0yMShexBdJcczFf_zjlP4',
+            bio: ` mollitia voluptatibus quas optio corrupti veritatis aliquam obcaecati
+                sequi neque? Sed in neque possimus corrupti sun`,
+            skills: [
+                {
+                    name: 'car-washing',
+                    price_per_hour: 20,
+                    price_currency: 'AZN',
+                    experience_description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make",
+                    task_count: 4
+                },
+                {
+                    name: 'repair',
+                    price_per_hour: 10,
+                    price_currency: 'AZN',
+                    experience_description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make",
+                    task_count: 4
+                }
+            ],
+            rating: 6
+        }       
     ]
 })
+

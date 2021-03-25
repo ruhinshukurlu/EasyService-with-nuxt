@@ -1,0 +1,13 @@
+@media (max-width : 1500px){
+    .custom-container{
+        font-size: 13px;
+    }
+
+    .custom-container h3{
+        font-size: 20px;
+    }
+
+    .custom-container h5{
+        font-size: 17px;
+    }
+}

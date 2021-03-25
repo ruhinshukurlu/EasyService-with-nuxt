@@ -134,7 +134,7 @@ footer {
     padding: 20px 0;
 }
 
-a{
+footer a{
     text-decoration: none;
     color: #fff;
 }

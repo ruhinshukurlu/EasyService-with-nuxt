@@ -1,17 +1,18 @@
 <template>
     <div class="row workers justify-content-center">
-        <transition-group>
-            <div class="worker-item" v-for='worker in workers' :key='worker.id'>
+            <div class="worker-item">
             <div style="display: flex; justify-content: space-between;" class=" card-body">
-                <div class="left-side d-column ">
-                    <img :src="worker.profile_img" style="width: 120px; height: 120px; object-fit: cover;" alt="profile-photo">
-                    <a style="color: darkgreen; margin-top: 8px; width: 180px;" class="card-title" href="/account/worker/5">View Profile &amp; Reviews</a>
+                <div class="left-side d-column mr-5">
+                    <img :src="worker.profile_img" class="prof-img" alt="profile-photo">
+                    <nuxt-link :to="`/workers/${service}/${worker.id}`" class="view-profile-link">
+                        View Profile & <br> Reviews
+                    </nuxt-link>
                 </div>
                 <div class="right-side worker-info">
                     <div style="display: flex; justify-content: space-between;">
                         <div>
                             <div class="full-name">
-                                <nuxt-link :to="`/workers/${worker.id}`">
+                                <nuxt-link :to="`/workers/${service}/${worker.id}`">
                                     {{worker.name}} {{worker.surname}}
                                 </nuxt-link>
                             </div>
@@ -30,22 +31,17 @@
                             <h5 class="bold">{{getCurrentSkillPrice(worker)}} / hr </h5>
                         </div>
                     </div>
-
                     <hr>
-                    <h5 class="bold">My Experience about {{service}}</h5>
+                    <h5 class="bold capitalize mb-3">My Experience about {{service}}</h5>
                     <p>{{ getSkillDescription(worker) }}</p>
-                    
                 </div>
-
             </div>
         </div>
-
-        </transition-group>
     </div>
 </template>
 <script>
 export default {
-    props : ['workers', 'service'],
+    props : ['worker', 'service'],
     methods : {
         getCurrentSkillPrice(worker){
             for (let i = 0; i < worker.skills.length; i++) {
@@ -84,5 +80,30 @@ export default {
     font-weight: bold;
     font-size: 25px;
 }
-    
+
+ .view-profile-link{
+     display: flex;
+     text-decoration: none;
+     color: #56d6b8;
+     border: 1px solid #56d6b8;
+     padding: 5px 10px;
+     margin-top: 20px;
+    border-radius: 10px;
+    transition: .4s;
+
+ }
+ 
+ .view-profile-link:hover{
+     background-color: #56d6b8;
+     color: #fff;
+ }
+
+ .prof-img{
+     width: 150px;
+     height: 150px;
+     object-fit: cover;
+    border: 1px solid #56d6b8;
+    border-radius: 5px;
+ }
+
 </style>

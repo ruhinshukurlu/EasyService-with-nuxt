@@ -159,6 +159,10 @@ ol li{
 	margin-bottom: 150px !important;
 }
 
+.capitalize{
+	text-transform: capitalize;
+}
+
 .mt-150{
 	margin-top: 150px !important;
 }
@@ -183,4 +187,14 @@ button{
 	max-width: 80%;
 	margin: auto;
 	background-color: #fff;
+}
+
+@media (max-width : 1600px){
+	.custom-container{
+		max-width: 90%;
+	}
+
+	.inner-container{
+		max-width: 95%;
+	}
 }

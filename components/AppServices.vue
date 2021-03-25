@@ -1,12 +1,10 @@
 <template>
   <div class="inner-container">
-    <div class="services row mt-5 mb-150">
+    <div class="services row mt-5 mb-150 justify-content-center">
       <h3 class="border-bottom pb-2 mb-5 bold full">Services</h3>
-      <div
-        class="col-12 col-lg-4 col-xl-3 col-sm-6 card-box"
+      <div class="col-12 col-lg-4 col-xl-3 col-sm-6 card-box mb-3"
         v-for="service in services"
-        :key="service.slug"
-      >
+        :key="service.slug">
         <div class="card">
           <nuxt-link :to="`services/${service.slug}`">
             <div class="card-img">
@@ -34,7 +32,7 @@ import { mapState } from "vuex";
 export default {
   computed: {
     ...mapState(["services"]),
-  },
+  }
 };
 </script>
 <style>
@@ -55,7 +53,7 @@ export default {
 
 .card-img img {
   width: 100%;
-  height: 100%;
+  height: 90%;
   /* object-fit: cover; */
 }
 
