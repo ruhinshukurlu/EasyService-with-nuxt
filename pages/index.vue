@@ -7,7 +7,6 @@
         <h3 class="full border-bottom pb-2 mb-5 bold">Top Workers</h3>
         <AppTopWorker v-for="worker in topWorkers" :key="worker.id" :worker="worker" />
       </div>
-
       <AppInfo />
     </div>
 
