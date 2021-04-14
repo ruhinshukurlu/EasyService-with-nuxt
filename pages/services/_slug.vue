@@ -29,22 +29,27 @@
         <div class="col-6 d-column address">
           <h5 class="mb-3">
             <i class="fas fa-sort-amount-down"></i>
-            Sort By Rating</h5>
-          <select name="sort" id="sort"  @change="sortByRating">
+            Sort By Rating
+          </h5>
+          <select name="sort" id="sort" @change="sortByRating">
             <option>Select Option</option>
             <option value="ascending">Lowets-Highest</option>
             <option value="descending">Highest-Lowets</option>
           </select>
         </div>
       </div>
-      <transition-group name="flip-list">
-        <AppWorker v-for="worker in filteredWorkers" :key="worker.id" :worker="worker" :service="service" />
-      </transition-group>
+      <AppWorker
+          v-for="skill in filteredSkills"
+          :key="skill.id"
+          :skill="skill"
+          :service="service"
+        />
     </div>
   </div>
 </template>
 <script>
 import { mapState } from "vuex";
+import gql from "graphql-tag";
 
 export default {
   data() {
@@ -52,6 +57,36 @@ export default {
       service: this.$route.params.slug,
     };
   },
+
+  apollo: {
+    api_workers: gql`
+      query {
+        api_workers: allSkills{
+          id
+          experience
+          about_experience
+          task_count
+          price_per_hour
+          price_currency
+          service{
+            slug
+          }
+          serviceProvider {
+            id
+            name
+            surname
+            profile_img
+            birth_date
+            rating
+            work_places{
+              name
+            }
+          }
+        }
+      }
+    `,
+  },
+
   computed: {
     ...mapState(["services", "workers", "workplaces"]),
 
@@ -67,37 +102,17 @@ export default {
       return result;
     },
 
-    filteredWorkers() {
-      return this.workers.filter((el) => {
-        let skills = el.skills;
-
-        for (let i = 0; i < skills.length; i++) {
-          const skill = skills[i];
-          if (skill.name === this.service) {
+    filteredSkills() {
+      return this.api_workers.filter((el) => {
+        if (el.service.slug === this.service) {
             return el;
-          }
         }
       });
-    }
-  },
-
-  methods: {
-    sortByRating(e){
-      if (e.target.value == 'ascending') {
-        console.log(this.filteredWorkers[0].rating);
-        this.filteredWorkers.sort((a, b) => (a.rating > b.rating ? 1 : -1));
-        console.log(this.filteredWorkers[0].rating);
-      }else if(e.target.value){
-        console.log(this.filteredWorkers[0].rating);
-        this.filteredWorkers.sort((a, b) => (a.rating < b.rating ? 1 : -1));
-        console.log(this.filteredWorkers[0].rating);
-      }
-    }
-  },
+    },
+  }
 };
 </script>
 <style scoped>
-
 .flip-list-move {
   transition: transform 1s;
 }

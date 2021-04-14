@@ -9,14 +9,14 @@
           <nuxt-link :to="`services/${service.slug}`">
             <div class="card-img">
               <img
-                :src="service.img"
+                :src="service.image"
                 class="card-img-self"
                 alt="Service image"
               />
             </div>
             <div class="card-body align-center p-3">
               <div class="d-flex full justify-content-between align-center">
-                <h5 class="m-0">{{service.name}}</h5>
+                <h5 class="m-0">{{service.title}}</h5>
                 <RightArrow />
               </div>
             </div>
@@ -27,11 +27,20 @@
   </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import gql from "graphql-tag";
 
 export default {
-  computed: {
-    ...mapState(["services"]),
+  apollo: {
+    services: 
+    gql`query {
+        services: allServices {
+          title
+          slug
+          description
+          image
+        }
+      }
+    `,
   }
 };
 </script>

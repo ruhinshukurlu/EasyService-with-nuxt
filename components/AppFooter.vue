@@ -119,9 +119,13 @@
     <!-- Footer Links -->
   </footer>
 </template>
+
+
 <script>
 export default {};
 </script>
+
+
 <style >
 
 footer {

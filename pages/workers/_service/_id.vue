@@ -7,7 +7,7 @@
             <div class="row g-0">
               <div class="col-md-5 d-flex align-items-center">
                 <img
-                  :src="currentWorker.profile_img"
+                  :src="currentWorkerSkill.serviceProvider.profile_img"
                   class="prof-img m-2"
                   alt="profile-photo"
                 />
@@ -15,10 +15,10 @@
               <div class="col-md-7">
                 <div class="d-column pt-2">
                   <h5 class="card-title bold mb-2">
-                    {{ currentWorker.name }} {{ currentWorker.surname }}
+                    {{ currentWorkerSkill.serviceProvider.name }} {{ currentWorkerSkill.serviceProvider.surname }}
                   </h5>
                   <div class="mb-2">
-                    <i class=" fa fa-star" style="color:yellow;"></i> Rating : {{currentWorker.rating}} / 10 
+                    <i class=" fa fa-star" style="color:yellow;"></i> Rating : {{currentWorkerSkill.serviceProvider.rating}} / 10 
                     </div>
                     <div  class="mb-2">
                         <i class="fas fa-tasks"></i> All Tasks Count : 213
@@ -35,20 +35,20 @@
               <h5 class="card-title bold">About Myself</h5>
               <hr>
               <p class="card-text">
-                {{currentWorker.bio}}
+                {{currentWorkerSkill.serviceProvider.bio}}
               </p>
 
               <hr />
               <div class="d-column">
-                  <div><i class="fa fa-check-square"></i> Birth Date : {{currentWorker.birth_date}}</div>
-                    <div><i class=" fa fa-star"></i> Rating : {{currentWorker.rating}} / 10</div>
+                  <div><i class="fa fa-check-square"></i> Birth Date : {{currentWorkerSkill.serviceProvider.birth_date}}</div>
+                    <div><i class=" fa fa-star"></i> Rating : {{currentWorkerSkill.serviceProvider.rating}} / 10</div>
                     <div>
                         <i class="fas fa-map-marker-alt"></i> 
-                        Work Places : <span class="mr-1" v-for="place in currentWorker.work_places" :key="place">{{place}},</span>
+                        Work Places : <span class="mr-1" v-for="place in currentWorkerSkill.serviceProvider.work_places" :key="place.id">{{place.name}},</span>
                     </div>
                     <div>
                         <i class="fas fa-language"></i>
-                        Languages : <span class="mr-1" v-for="lang in currentWorker.languages" :key="lang">{{lang}},</span>
+                        Languages : <span class="mr-1" ></span>
                     </div>
               </div>
             </div>
@@ -61,9 +61,9 @@
               <h5>All Skills</h5>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item d-flex justify-content-between" v-for="skill in currentWorker.skills" :key="skill">
-                <nuxt-link :to="`/workers/${skill.name}/${currentWorker.id}`" class="skill-link">
-                    <span> {{ skill.name }}</span>
+              <li class="list-group-item d-flex justify-content-between" v-for="skill in getAllSkills" :key="skill.id">
+                <nuxt-link :to="`/workers/${skill.service.slug}/${currentWorkerSkill.serviceProvider.id}`" class="skill-link">
+                    <span> {{ skill.service.title }}</span>
                     <RightArrow />
                 </nuxt-link>
                 
@@ -75,17 +75,17 @@
       <!-- right side -->
       <div class="col-md-8">
         <div class="d-flex full justify-content-between">
-            <h3 class="bold capitalize">{{currentSkill.name}} </h3>
-            <h5 class="bold">{{currentSkill.price_per_hour}} {{ currentSkill.price_currency }} / Hr</h5>
+            <h3 class="bold capitalize">{{service}} </h3>
+            <h5 class="bold">{{currentWorkerSkill.price_per_hour}} {{ currentWorkerSkill.price_currency }} / Hr</h5>
         </div>
         <hr />
         <div class="div border-bottom mb-5 pb-2">
           <h5 class="bold capitalize">My Experience in {{service}}</h5>
-          {{currentSkill.experience_description}}
+          {{currentWorkerSkill.about_experience}}
         </div>
         <div  class="mb-5">
             <h5 class="bold capitalize">
-                <i class="fas fa-tasks"></i> Task Counts in {{service}} : {{currentSkill.task_count}}
+                <i class="fas fa-tasks"></i> Task Counts in {{currentWorkerSkill.service.name}} : {{currentWorkerSkill.task_count}}
             </h5>
         </div>
         <SkillComments :service="service"/>
@@ -95,6 +95,9 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import gql from "graphql-tag";
+
+
 export default {
   data() {
     return {
@@ -103,41 +106,59 @@ export default {
     };
   },
 
+  apollo: {
+    api_workers: gql`
+      query {
+        api_workers: allSkills{
+          id
+          experience
+          about_experience
+          task_count
+          price_per_hour
+          price_currency
+          service{
+            slug
+            title
+          }
+          serviceProvider {
+            id
+            name
+            surname
+            profile_img
+            birth_date
+            rating
+            work_places{
+              name
+            }
+          }
+        }
+      }
+    `,
+  },
+
   computed: {
     ...mapState(["workers"]),
 
-    currentWorker() {
+    currentWorkerSkill() {
       let result;
-      for (let i = 0; i < this.workers.length; i++) {
-        const worker = this.workers[i];
-        if (worker.id == this.id) {
-          result = this.workers[i];
+      for (let i = 0; i < this.api_workers.length; i++) {
+        if (this.api_workers[i].serviceProvider.id == this.id && this.api_workers[i].service.slug == this.service) {
+          result = this.api_workers[i];
           break;
         }
       }
       return result;
     },
 
-    currentSkill() {
-      let result;
-
-      for (let i = 0; i < this.workers.length; i++) {
-        const worker = this.workers[i];
-
-        if (worker.id == this.id) {
-          for (let j = 0; j < worker.skills.length; j++) {
-            const skill = worker.skills[j];
-
-            if (skill.name === this.service) {
-              result = worker.skills[j];
-              break;
-            }
-          }
+    getAllSkills(){
+      let result = [];
+      for (let i = 0; i < this.api_workers.length; i++) {
+        if (this.api_workers[i].serviceProvider.id == this.id) {
+          result.push(this.api_workers[i]);
         }
       }
-
       return result;
-    },
+    }
   },
 };
 </script>

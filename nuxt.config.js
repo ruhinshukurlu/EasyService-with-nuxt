@@ -31,14 +31,28 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+   
   ],
+
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
+    '@nuxtjs/apollo',
   ],
 
+
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: 'http://127.0.0.1:3000/api/graphql',
+      }
+    }
+  },
+
+
+ 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }

@@ -334,5 +334,6 @@ export const state = () => ({
             rating: 6
         }       
     ]
-})
 
+
+})
